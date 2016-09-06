@@ -27,8 +27,9 @@ namespace FIleReaper
                 fs.Position = fs.Length - reapedBytes.Length;
                 fs.Read(reapedBytes, 0, reapedBytes.Length);
             }
-            var reapedFileName = Path.GetFileName(pathToFile);
-            File.WriteAllText(reapedFileName ?? "reapedData.txt", Encoding.UTF8.GetString(reapedBytes));
+            var fileName = Path.GetFileName(pathToFile);
+            var reapedFileName = (fileName ?? "reapedData.txt") + ".reaped." + DateTime.Now.ToString("yyyy.MM.dd") + ".txt";
+            File.WriteAllText(reapedFileName, Encoding.UTF8.GetString(reapedBytes));
             Console.WriteLine("Success");
             Console.Read();
         }
